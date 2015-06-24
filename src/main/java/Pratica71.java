@@ -15,45 +15,39 @@ public class Pratica71 {
 
     public static void main(String[] args) {
         int numero = 0;
-        int valido=1;
+        int valido = 1;
         int quer = 0;
         int pos;
         ArrayList<Jogador> timeco = new ArrayList<Jogador>();
-       
+
         Scanner scanner = new Scanner(System.in);
         String nome1 = null;
         int numJogadores = 0;
-        System.out.print("Número de Jogadores: ");
+        System.out.print("Numero de Jogadores: ");
         if (scanner.hasNextInt()) {
             numJogadores = scanner.nextInt();
         } else {
-           while (!scanner.hasNextInt()) {
-                    System.out.println("Digite um numero!");
-                    scanner.next();
-                }
-                numJogadores= scanner.nextInt();
+            while (!scanner.hasNextInt()) {
+                System.out.println("Digite um numero!");
+                scanner.next();
+            }
+            numJogadores = scanner.nextInt();
         }
         for (int i = 0; i < numJogadores; i++) {
-            System.out.println("Digite a posicao do " + (i+1) + " jogador:  ");
-            if (scanner.hasNext()) {
+            System.out.println("Digite a posicao do " + (i + 1) + " jogador:  ");
+            
                 nome1 = scanner.next();
-            } else {
-               while(!scanner.hasNext()){
-                   System.out.println("Digite uma posicao valida");
-                   
-               }
-               nome1 = scanner.next();
-            }
-            System.out.println("Digite o numero do " + (i+1) + " jogador:  ");
+           
+            System.out.println("Digite o numero do " + (i + 1) + " jogador:  ");
             if (scanner.hasNextInt()) {
                 numero = scanner.nextInt();
             } else {
-                
+
                 while (!scanner.hasNextInt()) {
                     System.out.println("Digite um numero!");
                     scanner.next();
                 }
-                numero= scanner.nextInt();
+                numero = scanner.nextInt();
             }
             timeco.add(new Jogador(numero, nome1));
 
@@ -72,10 +66,10 @@ public class Pratica71 {
             quer = scanner.nextInt();
         } else {
             while (!scanner.hasNextInt()) {
-                    System.out.println("Digite um numero!");
-                    scanner.next();
-                }
-                quer= scanner.nextInt();
+                System.out.println("Digite um numero!");
+                scanner.next();
+            }
+            quer = scanner.nextInt();
         }
         while (quer == 1) {
             System.out.println("Digite o numero do  jogador:  ");
@@ -86,48 +80,32 @@ public class Pratica71 {
                     System.out.println("Digite um numero!");
                     scanner.next();
                 }
-                numero= scanner.nextInt();
+                numero = scanner.nextInt();
             }
-            if(numero==0){
+            if (numero == 0) {
                 break;
             }
-            
+
             System.out.println("Digite a posicao do jogador:  ");
             if (scanner.hasNext()) {
                 nome1 = scanner.next();
             } else {
                 System.out.println("Digite um nome!");
             }
-            pos=Collections.binarySearch(timeco, new Jogador(numero, nome1), new JogadorComparator(true, true, true));
+            pos = Collections.binarySearch(timeco, new Jogador(numero, nome1), new JogadorComparator(true, true, true));
             if (pos >= 0) {
-				timeco.set(pos, new Jogador(numero, nome1));
-			} else {
-				timeco.add(new Jogador(numero, nome1));
-			}
-           
+                timeco.set(pos, new Jogador(numero, nome1));
+            } else {
+                timeco.add(new Jogador(numero, nome1));
+            }
+
             timeco.sort(new JogadorComparator(true, true, true));
-             System.out.println("Time ordenado por número (asc) e nome (desc)");
-        System.out.println("Num Nome");
-        for (Jogador j : timeco) {
-            System.out.println(String.format(format, j.getNumero(), j.getNome()));
+            System.out.println("Time ordenado por número (asc) e nome (desc)");
+            System.out.println("Num Nome");
+            for (Jogador j : timeco) {
+                System.out.println(String.format(format, j.getNumero(), j.getNome()));
+            }
         }
-        }
-        
-       
-        // para buscar por número é necessário reordenar
-       /* JogadorComparator comparador = new JogadorComparator();
-         jogadores.sort(comparador);
-         System.out.println("Time ordenado por número (asc) e nome (asc)");
-         System.out.println("Num Nome");
-         for (Jogador j : jogadores) {
-         System.out.println(String.format(format, j.getNumero(), j.getNome()));
-         }
-         int pos = Collections.binarySearch(jogadores, new Jogador(10, "Beltrano"), comparador);
-         if (pos >= 0) {
-         System.out.print("Jogador encontrado: ");
-         System.out.println(jogadores.get(pos));
-         } else {
-         System.out.println("Jogador não encontrado. Posição: " + (-pos - 1));
-         }*/
+
     }
 }
